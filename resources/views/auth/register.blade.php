@@ -4,7 +4,7 @@
 
 @section('auth_container')
     <img src="">
-    <h1 class="text-center text-2xl">Inscrivez vous</h1>
+    <h1 class="text-center text-2xl font-bold mb-4">Inscrivez-vous</h1>
     <form class="w-full flex flex-col gap-5">
         <fieldset class="rounded-lg pt-0 px-[12px] pb-[12px] w-[90%] border border-black m-auto">
             <legend class="text-[0.85rem]">Nom</legend>
@@ -31,5 +31,5 @@
         <hr class="w-2/5">OR<hr class="w-2/5">
     </div>
 
-    <p class="text-[0.88rem]">Vous avez déjà un compte ? <a class="text-[#2143B0]" href="#">Connectez-vous</a></p>
+    <p class="text-[0.88rem]">Vous avez déjà un compte ? <a class="text-[#2143B0]" href="{{ route('admin.login') }}">Connectez-vous</a></p>
 @endsection        
