@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('filiere', function (Blueprint $table) {
+        Schema::create('filieres', function (Blueprint $table) {
             $table->id();
             $table->enum('nom', ['Architecture Logicielle', 'Sécurité Informatique', 'Intélligence Artificielle']);
             $table->enum('classe', ['Licence 3', 'Master 2']);
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('filiere');
+        Schema::dropIfExists('filieres');
     }
 };
