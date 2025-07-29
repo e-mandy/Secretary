@@ -8,10 +8,10 @@
     <title>@yield('title')</title>
 </head>
 <body class="bg-[#F3F4F6] h-screen">
-    <aside class="w-[300px] bg-white h-screen px-4 shadow-lg pt-8">
+    <aside class="w-[300px] bg-white h-screen px-4 shadow-lg pt-8 fixed">
         @include('partials.sidebar')
     </aside>
-    <main class="">
+    <main class="ml-[300px] min-h-screen px-8 pt-8">
         @yield('content')
     </main>
 </body>

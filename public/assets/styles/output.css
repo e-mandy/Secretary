@@ -373,7 +373,7 @@
     margin: 0;
     padding: 0;
     border: 0 solid;
-    font-family: 'Space Mono', sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
   html, :host {
     line-height: 1.5;
