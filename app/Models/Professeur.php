@@ -14,4 +14,5 @@ class Professeur extends Model
         'specialite',
         'status'
     ];
+
 }

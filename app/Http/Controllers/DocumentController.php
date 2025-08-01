@@ -29,7 +29,10 @@ class DocumentController extends Controller
      */
     public function store(StoreDocumentRequest $request)
     {
-        //
+        if($request->hasFile('document')){
+            $path = $request->file('document')->path();
+            dd($path);
+        }
     }
 
     /**

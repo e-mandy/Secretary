@@ -112,28 +112,32 @@
         <div class="popup_add_doc z-50 bg-white hidden w-[440px] fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-8 pt-6 pb-7 rounded-lg">
             <h3 class="text-2xl font-bold mb-2">Ajouter un nouveau document</h3>
             <p class="text-[#71717A] mb-5">Remplissez les informations relatives au document</p>
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('admin.documents.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="w-full mb-4">
-                    <label for="lastname" class="font-medium flex flex-col gap-1">
+                    <label for="id_professeur" class="font-medium flex flex-col gap-1">
                         Professeur
-                        <select class="outline-none border border-gray-200 py-2 px-2 rounded" type="text" name="lastname" id="lastname" required>
+                        <select class="outline-none border border-gray-200 py-2 px-2 rounded" name="id_professeur" id="id_professeur">
                             <option selected disabled>Sélectionner un professeur</option>
+                            <option value="1">Abdel Hakim</option>
+                            <option value="2">Moustapha Naïm</option>
                         </select>
                     </label>
                 </div>
                 <div class="w-full mb-4">
-                    <label for="lastname" class="font-medium flex flex-col gap-1">
-                        Fichier
-                        <select class="outline-none border border-gray-200 py-2 px-2 rounded" type="text" name="lastname" id="lastname" required>
+                    <label for="type" class="font-medium flex flex-col gap-1">
+                        Type de document
+                        <select class="outline-none border border-gray-200 py-2 px-2 rounded" name="type" id="type">
                             <option selected disabled>Sélectionner le type</option>
+                            <option value="CV">Curriculum Vitae</option>
+                            <option value="Diplôme">Diplôme</option>
                         </select>
                     </label>
                 </div>
                 <div class="mb-4">
-                    <label for="phone" class="font-medium flex flex-col gap-1">
+                    <label for="document" class="font-medium flex flex-col gap-1">
                         Choisir le fichier
-                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="file" name="phone" id="phone" required>
+                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="file" name="document" id="document" required>
                     </label>
                 </div>
                 <button class="w-full bg-black cursor-pointer text-white py-2 rounded" type="submit">Ajouter</button>
