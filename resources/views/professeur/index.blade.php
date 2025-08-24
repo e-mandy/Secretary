@@ -38,7 +38,7 @@
                 <span class="text-3xl text-green-500">{{ $prof_incomplet }}</span>
             </div>
         </section>
-        <section class="bg-white px-6 pt-6 pb-6">
+        <section class="bg-white px-6 py-6">
             <div class="flex justify-between items-center mb-5">
                 <div>
                     <h3 class="text-2xl font-semibold">Liste des Professeurs</h3>
@@ -98,7 +98,7 @@
                         </a>
                     </div>
                 @endforeach
-                
+
             </div>
         </section>
         <div class="overlay hidden fixed z-40 bg-black opacity-75 w-screen h-screen top-0 left-0"></div>
@@ -106,7 +106,7 @@
         <div class="popup_add_prof z-50 bg-white hidden w-[440px] fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-8 pt-6 pb-7 rounded-lg">
             <h3 class="text-2xl font-bold mb-2">Ajouter un nouveau professeur</h3>
             <p class="text-[#71717A] mb-5">Remplissez les informations relatives au professeur</p>
-            <form method="POST" action="{{ route('admin.professeur.store') }}">
+            <form method="POST" action="{{ route('admin.professeurs.store') }}">
                 @csrf
                 <div class="flex items-center w-full justify-between mb-4">
                     <label for="lastname" class="font-medium flex flex-col gap-1 w-[48%]">

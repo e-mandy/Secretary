@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ProfesseurController;
+use App\Http\Controllers\PVSoutenanceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,6 +29,7 @@ Route::group([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::resource('/professeur', ProfesseurController::class);
+    Route::resource('/professeurs', ProfesseurController::class);
     Route::resource('/documents', DocumentController::class);
+    Route::resource('/pv_soutenance', PVSoutenanceController::class);
 });
