@@ -129,13 +129,13 @@
                         </div>
                         <div>
                             <h3 class="text-gray-600 font-medium uppercase mb-3">Résultats</h3>
-                            <p class="flex gap-2 mb-2 text-sm items-center">
+                            <p class="flex mb-4 text-sm items-center justify-between">
                                 Note:
                                 <span>16/20</span>
                             </p>
-                            <p>
+                            <p class="flex items-center justify-between">
                                 Mention:
-                                <span>Bien</span>
+                                <span class="text-xl">Bien</span>
                             </p>
                         </div>
                     </div>
