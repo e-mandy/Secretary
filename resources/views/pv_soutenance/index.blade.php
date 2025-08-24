@@ -144,10 +144,10 @@
         </section>
         <div class="overlay hidden fixed z-40 bg-black opacity-75 w-screen h-screen top-0 left-0"></div>
 
-        <div class="popup_add_pv_soutenance z-50 bg-white hidden w-[540px] fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-8 pt-6 pb-7 rounded-lg">
+        <div class="popup_add_pv_soutenance z-50 bg-white hidden w-[600px] fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-8 pt-6 pb-7 rounded-lg">
             <h3 class="text-2xl font-bold mb-2">Créer un nouveau PV de Soutenance</h3>
             <p class="text-[#71717A] mb-5">Remplissez les informations relatives à la soutenance</p>
-            <form method="POST" action="{{ route('admin.professeurs.store') }}">
+            <form method="POST" action="#">
                 @csrf
                 <div class="flex items-center w-full justify-between mb-4">
                     <label for="nom" class="font-medium flex flex-col gap-1 w-[48%]">
@@ -156,7 +156,7 @@
                     </label>
                     <label for="firstname" class="font-medium flex flex-col gap-1 w-[48%]">
                         Type de soutenance
-                        <select class="border border-black rounded-lg p-2" name="id_filiere" id="id_filiere">
+                        <select class="border border-gray-200 rounded-lg p-2" name="id_filiere" id="id_filiere">
                             <option disabled>Sélectionner le type</option>
                         </select>
                     </label>
@@ -174,7 +174,25 @@
                 <div class="mb-6">
                     <label for="specialite" class="font-medium flex flex-col gap-1">
                         Membres du jury
-                        <textarea class="border-1 border-gray-300 rounded-lg placeholder:text-gray-300" name="membres_jury" id="membres_jury" cols="30" rows="5" placeholder="Listez les membres du jury (un par ligne)"></textarea>
+                        <textarea class="pl-2 pt-2 placeholder:text-sm border-1 border-gray-300 rounded-lg" name="membres_jury" id="membres_jury" cols="30" rows="3" placeholder="Listez les membres du jury (un par ligne)"></textarea>
+                    </label>
+                </div>
+                <div class="flex items-center w-full justify-between mb-4">
+                    <label for="note" class="font-medium flex flex-col gap-1 w-[48%]">
+                        Note
+                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="text" name="note" id="note" placeholder="Ex: 16/20" required>
+                    </label>
+                    <label for="heure" class="font-medium flex flex-col gap-1 w-[48%]">
+                        Mention
+                        <select class="border border-gray-200 rounded-lg p-2" name="mention" id="mention">
+                            <option disabled>Sélectionner la mention</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="mb-6">
+                    <label for="specialite" class="font-medium flex flex-col gap-1">
+                        Observations
+                        <textarea class="pl-2 pt-2 placeholder:text-sm border-1 border-gray-300 rounded-lg" name="observations" id="observations" cols="30" rows="3" placeholder="Commentaires et observations des membres du jury"></textarea>
                     </label>
                 </div>
                 <button class="w-full bg-black cursor-pointer text-white py-2 rounded" type="submit">Ajouter</button>
