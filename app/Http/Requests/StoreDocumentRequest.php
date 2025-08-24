@@ -23,7 +23,7 @@ class StoreDocumentRequest extends FormRequest
     {
         return [
             'type' => ['string', 'in:CV,Diplôme'],
-            'document' => ['file','mimes:pdf,docx,jpeg,png,jpg'],
+            'document' => ['file','mimes:pdf,docx,jpeg,png,jpg', 'max:5128'],
             'id_professeur' => ['required', 'integer']
         ];
     }

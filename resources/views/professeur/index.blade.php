@@ -38,7 +38,7 @@
                 <span class="text-3xl text-green-500">{{ $prof_incomplet }}</span>
             </div>
         </section>
-        <section class="bg-white px-6 pt-6">
+        <section class="bg-white px-6 pt-6 pb-6">
             <div class="flex justify-between items-center mb-5">
                 <div>
                     <h3 class="text-2xl font-semibold">Liste des Professeurs</h3>

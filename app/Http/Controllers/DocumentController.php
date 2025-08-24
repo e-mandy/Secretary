@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
+use App\Models\Professeur;
+use App\Models\Type;
 
 class DocumentController extends Controller
 {
@@ -13,7 +15,12 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        return view('document.index');
+        return view('document.index', [
+            'documents' => Document::all(),
+            'doc_amount' => Document::all()->count(),
+            'types' => Type::all(),
+            'profs' => Professeur::all()
+        ]);
     }
 
     /**
@@ -30,8 +37,20 @@ class DocumentController extends Controller
     public function store(StoreDocumentRequest $request)
     {
         if($request->hasFile('document')){
-            $path = $request->file('document')->path();
-            dd($path);
+            $file = $request->file('document');
+
+            $prof_info = Professeur::where('id', $request->id_professeur)->first(['lastname', 'firstname']);
+            $filename = "{$prof_info->lastname}_{$prof_info->firstname}_{$request->type}.{$file->getClientOriginalExtension()}";
+
+            Document::create([
+                'nom' => $filename,
+                'id_professor' => $request->id_professeur,
+                'type_id' => $request->type_id
+            ]);
+
+            $file->storeAs('documents', $filename, 'public');
+
+            return to_route('admin.documents.index');
         }
     }
 
