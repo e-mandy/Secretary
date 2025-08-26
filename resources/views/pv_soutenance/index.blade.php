@@ -145,55 +145,68 @@
         <div class="overlay hidden fixed z-40 bg-black opacity-75 w-screen h-screen top-0 left-0"></div>
 
         <div class="popup_add_pv_soutenance z-50 bg-white hidden w-[600px] fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-8 pt-6 pb-7 rounded-lg">
-            <h3 class="text-2xl font-bold mb-2">Créer un nouveau PV de Soutenance</h3>
-            <p class="text-[#71717A] mb-5">Remplissez les informations relatives à la soutenance</p>
+            <h3 class="text-2xl font-bold">Créer un nouveau PV de Soutenance</h3>
+            <p class="text-[#71717A] mb-6">Remplissez les informations relatives à la soutenance</p>
             <form method="POST" action="#">
                 @csrf
                 <div class="flex items-center w-full justify-between mb-4">
-                    <label for="nom" class="font-medium flex flex-col gap-1 w-[48%]">
+                    <label for="nom_etu" class="font-medium flex flex-col gap-1 w-[48%] text-sm">
                         Nom de l'étudiant
-                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="text" name="nom" id="nom" placeholder="eg. d'ALMEIDA" required>
+                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="text" name="nom_etu" id="nom_etu" placeholder="eg. d'ALMEIDA" required>
                     </label>
-                    <label for="firstname" class="font-medium flex flex-col gap-1 w-[48%]">
+                    <label for="firstname" class="font-medium flex flex-col gap-1 w-[48%] text-sm">
                         Type de soutenance
-                        <select class="border border-gray-200 rounded-lg p-2" name="id_filiere" id="id_filiere">
-                            <option disabled>Sélectionner le type</option>
+                        <select class="border border-gray-200 rounded-lg p-2 text-gray-500" name="id_filiere" id="id_filiere">
+                            <option value="">Sélectionner le type</option>
                         </select>
                     </label>
                 </div>
                 <div class="flex items-center w-full justify-between mb-4">
-                    <label for="date" class="font-medium flex flex-col gap-1 w-[48%]">
+                    <label for="soutenance_date" class="font-medium flex flex-col gap-1 w-[48%] text-sm">
                         Date
-                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="date" name="date" id="date" required>
+                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="date" name="soutenance_date" id="soutenance_date" required>
                     </label>
-                    <label for="heure" class="font-medium flex flex-col gap-1 w-[48%]">
+                    <label for="heure" class="font-medium flex flex-col gap-1 w-[48%] text-sm">
                         Heure
-                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="time" name="date" id="date" required>
+                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="time" name="heure" id="heure" required>
                     </label>
                 </div>
-                <div class="mb-6">
-                    <label for="specialite" class="font-medium flex flex-col gap-1">
+                <div class="mb-4">
+                    <label for="jurys" class="font-medium flex flex-col gap-1 text-sm">
                         Membres du jury
-                        <textarea class="pl-2 pt-2 placeholder:text-sm border-1 border-gray-300 rounded-lg" name="membres_jury" id="membres_jury" cols="30" rows="3" placeholder="Listez les membres du jury (un par ligne)"></textarea>
+                        <textarea class="pl-2 pt-2 placeholder:text-sm border-1 border-gray-300 rounded-lg" name="jurys" id="jurys" cols="30" rows="3" placeholder="Listez les membres du jury (un par ligne)"></textarea>
                     </label>
                 </div>
                 <div class="flex items-center w-full justify-between mb-4">
-                    <label for="note" class="font-medium flex flex-col gap-1 w-[48%]">
+                    <label for="note" class="font-medium flex flex-col gap-1 w-[48%] text-sm">
                         Note
                         <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="text" name="note" id="note" placeholder="Ex: 16/20" required>
                     </label>
-                    <label for="heure" class="font-medium flex flex-col gap-1 w-[48%]">
+                    <label for="mention" class="font-medium flex flex-col gap-1 w-[48%] text-sm">
                         Mention
-                        <select class="border border-gray-200 rounded-lg p-2" name="mention" id="mention">
-                            <option disabled>Sélectionner la mention</option>
+                        <select class="border border-gray-200 rounded-lg p-2 text-gray-500" name="mention" id="mention">
+                            <option value="">Sélectionner la mention</option>
                         </select>
                     </label>
                 </div>
-                <div class="mb-6">
-                    <label for="specialite" class="font-medium flex flex-col gap-1">
-                        Observations
-                        <textarea class="pl-2 pt-2 placeholder:text-sm border-1 border-gray-300 rounded-lg" name="observations" id="observations" cols="30" rows="3" placeholder="Commentaires et observations des membres du jury"></textarea>
+                <div class="mb-4">
+                    <label class="flex flex-col items-center mb-1 border-2 border-dashed border-gray-300 rounded-lg mx-auto p-4 hover:border-blue-500" for="pv_file">
+                        <span class="bg-gray-200 p-1 rounded-lg mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                            </svg>
+                        </span>
+                        <h5 class="font-medium">Téléchargez le PV de Soutenance</h5>
+                        <p class="text-sm text-gray-500 font-medium mb-2">PDF jusqu'à 8mo.</p>
+                        <span class="flex justify-between border border-gray-300 text-sm font-medium p-2 w-[31%] rounded-lg items-center hover:bg-red-100 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 xs:hidden sm:block">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                            </svg>
+                            Choisir un fichier
+                        </span>
+                        <input class="hidden" type="file" name="pv_file" id="pv_file">
                     </label>
+                    <legend class="text-red-400 font-medium text-xs">Le fichier du PV de soutenance peut être ajouté après la création du PV de soutenance.</legend>
                 </div>
                 <button class="w-full bg-black cursor-pointer text-white py-2 rounded" type="submit">Ajouter</button>
             </form>
