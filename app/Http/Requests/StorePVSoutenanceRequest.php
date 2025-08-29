@@ -23,13 +23,13 @@ class StorePVSoutenanceRequest extends FormRequest
     {
         return [
             "nom_etu" => ['required', 'string', 'max:255'],
-            "soutenance_date" => ['required', 'date'],
-            "heure" => ['requried', 'date_format:H:i'],
+            "soutenance_date" => ['date', 'required'],
+            "heure" => ['required', 'date_format:H:i'],
             "jurys" => ['required', 'string'],
             "note" => ['required', 'regex:/^(20|1[0-9]|0[0-9])\/20$/'],
-            "mention" => ['contains:passable,Abien,bien,Tbien,excellent'],
-            "pv_file" => ['file', 'mimes:pdf', 'size:8192'],
-            "id_filiere" => ['required']
+            "mention" => ['in:passable,Abien,bien,Tbien,excellent'],
+            "pv_file" => ['file', 'mimes:pdf', 'max:8192', 'nullable'],
+            "id_filiere" => ['required', 'integer']
         ];
     }
 }

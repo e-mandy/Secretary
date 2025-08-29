@@ -6,6 +6,8 @@ use App\Http\Requests\StorePVSoutenanceRequest;
 use App\Models\Filiere;
 use App\Models\PVSoutenance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PVSoutenanceController extends Controller
 {
@@ -14,7 +16,12 @@ class PVSoutenanceController extends Controller
      */
     public function index()
     {
-        return view('pv_soutenance.index');
+        $pv = PvSoutenance::all();
+        return view('pv_soutenance.index', [
+            "pv_soutenances" => $pv,
+            "nbr_pv" => PVSoutenance::all()->count(),
+            "filieres" => Filiere::all()
+        ]);
     }
 
     /**
@@ -32,17 +39,27 @@ class PVSoutenanceController extends Controller
     {
         $validateFields = $request->validated();
 
+
+        $created_pv = PVSoutenance::create(
+            $validateFields,
+        );
+
+
+
         if($request->hasFile('pv_file')){
             $filiere_name = Filiere::where('id', $request->id_filiere)->pluck('nom');
             $file = $request->file('pv_file');
             $file_ext = $file->getClientOriginalExtension();
             $filename = "{$validateFields['nom_etu']}_{$filiere_name}.{$file_ext}";
+
+            $file->storeAs('pv_soutenances', $filename, 'public');
+
+            $created_pv->update([
+                "pv_file" => $filename
+            ]);
         }
 
-        PVSoutenance::create([
-            ...$validateFields,
-            "pv_file" => $filename
-        ]);
+        return to_route('admin.pv_soutenance.index')->with(['success' => "PV crée avec succès"]);
     }
 
     /**
