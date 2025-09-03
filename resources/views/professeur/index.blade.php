@@ -44,7 +44,15 @@
                     <h3 class="text-2xl font-semibold">Liste des Professeurs</h3>
                     <p class="text-[#71717A]">{{ $prof_count }} professeur(s) trouvé(s)</p>
                 </div>
-                <div>
+                <div class="flex items-center gap-4">
+                    <div class="flex gap-2 items-center bg-gray-200 p-1 rounded-lg">
+                        <div class="layoutIcon active p-1 rounded-lg cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid-icon lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                        </div>
+                        <div class="groupIcon p-1 rounded-lg cursor-pointer bg-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-table2-icon lucide-table-2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+                        </div>
+                    </div>
                     <label for="search" class="flex gap-1 border rounded-lg py-1 px-2 items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -53,7 +61,7 @@
                     </label>
                 </div>
             </div>
-            <div class="grid grid-cols-3 gap-3">
+            <div class="layoutSide hidden grid-cols-3 gap-3">
                 @foreach($professeurs as $professeur)
                     <div class="bg-white px-6 py-7 rounded-xl border border-gray-300">
                         <div class="flex justify-between items-center">
@@ -99,6 +107,65 @@
                     </div>
                 @endforeach
 
+            </div>
+            <div class="groupSide block">
+                <table class="w-full border border-gray-300 rounded-lg border-separate">
+                    <thead>
+                        <tr class="px-4">
+                            <th class="">Professeur</th>
+                            <th>Spécialité</th>
+                            <th>Contact</th>
+                            <th>Date de création</th>
+                            <th>Documents</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($professeurs as $professeur)
+                            <tr class="border-t-1 border-gray-300">
+                                <td class="text-center flex flex-col font-bold">
+                                    <span>
+                                        {{ $professeur->lastname }}
+                                    </span>
+                                    <span>
+                                        {{ $professeur->firstname }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="block py-[1px] bg-blue-50 border border-gray-300 rounded-xl text-blue-700 text-sm font-bold hover:bg-gray-800 text-center w-fit px-2">{{ $professeur->specialite }}</span>
+                                </td>
+                                <td>
+                                    <p class="flex items-center gap-2 text-sm mb-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                        </svg>
+                                        {{ $professeur->email }}
+                                    </p>
+                                    <p class="flex items-center gap-2 text-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                                        </svg>
+                                        {{ $professeur->phone }}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p></p>
+                                    <p>Août 2025</p>
+                                </td>
+                                <td class="flex flex-col items-center">
+                                    <span>08</span><span>documents</span>
+                                </td>
+                                <td>
+                                    <div class="p-1 hover:bg-gray-300 rounded cursor-pointer w-fit mx-auto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                                        </svg>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </section>
         <div class="overlay hidden fixed z-40 bg-black opacity-75 w-screen h-screen top-0 left-0"></div>

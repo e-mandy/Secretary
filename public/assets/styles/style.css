@@ -1,0 +1,12 @@
+.groupSide table thead th{
+    font-weight: normal;
+    text-align: start;
+    padding: 10px 0px;
+    color: gray;
+}
+
+.groupSide table tbody td{
+    vertical-align: middle;
+    height: 100%;
+    padding: 15px 0px;
+}
