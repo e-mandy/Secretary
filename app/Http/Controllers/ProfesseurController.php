@@ -48,9 +48,9 @@ class ProfesseurController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Professeur $professeur)
     {
-        //
+        return view('professeur.show', $professeur);
     }
 
     /**

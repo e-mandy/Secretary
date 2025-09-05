@@ -1,0 +1,12 @@
+.onglets li.is_active{
+    background-color: white;
+}
+
+table thead th{
+    text-align: start;
+    padding: 15px 0px;
+}
+
+table tbody td{
+    padding: 18px 0px;
+}
