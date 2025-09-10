@@ -51,7 +51,7 @@ class ProfesseurController extends Controller
      */
     public function show(Professeur $professeur)
     {
-        return view('professeur.show', $professeur);
+        return view('professeur.show', compact('professeur'));
     }
 
     /**

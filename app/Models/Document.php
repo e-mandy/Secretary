@@ -24,7 +24,7 @@ class Document extends Model
 
     public function getDateCreatedAtAttribute(){
         $date = Carbon::parse($this->created_at);
-        return "$date->day/$date->month/$date->year";
+        return $date->isoFormat('DD/MM/YYYY');
     }
 
     public function type(): HasOne
