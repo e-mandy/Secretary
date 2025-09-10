@@ -8,7 +8,7 @@
     <section>
         <div class="flex justify-between items-center mb-10">
             <div class="flex gap-3 items-center">
-                <a href="#" class="flex bg-white h-fit py-1 px-2 rounded-sm gap-1 items-center border border-gray-300">
+                <a href="{{ route('admin.professeurs.index') }}" class="flex bg-white h-fit py-1 px-2 rounded-sm gap-1 items-center border border-gray-300">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
                     </svg>

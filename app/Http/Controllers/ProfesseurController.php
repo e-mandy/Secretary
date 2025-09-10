@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProfesseurRequest;
+use App\Http\Requests\UpdateProfesseurRequest;
 use App\Models\Professeur;
 use Illuminate\Http\Request;
 
@@ -56,24 +57,33 @@ class ProfesseurController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Professeur $professeur)
     {
-        //
+        return view('professeur.edit', $professeur);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProfesseurRequest $request, Professeur $professeur)
     {
-        //
+        $validated_fields = $request->validated();
+
+        $professeur->update([
+            ...$validated_fields,
+            'status' => "Incomplet",
+        ]);
+
+        return to_route('admin.professeurs.index')->with('success', "Nouveau professeur ajouté");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Professeur $professeur)
     {
-        //
+        $professeur->delete();
+
+        return redirect()->route('admin.professeurs.index')->with('success', "Professeur supprimé avec succès");
     }
 }

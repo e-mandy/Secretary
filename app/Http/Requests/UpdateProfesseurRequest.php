@@ -22,7 +22,11 @@ class UpdateProfesseurRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "lastname" => ['string', 'required', 'max:255'],
+            "firstname" => ['string', 'required', 'max:255'],
+            "email" => ['email', 'required'],
+            "phone" => ["starts_with:+22901, +229 01", 'max:21'],
+            "specialite" => ['string', 'nullable']
         ];
     }
 }

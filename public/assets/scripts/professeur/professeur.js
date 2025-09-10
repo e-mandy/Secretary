@@ -29,3 +29,8 @@ groupIcon.addEventListener('click', ()=>{
     groupSide.classList.remove('hidden')
     groupSide.classList.add('block')
 })
+
+overlay.addEventListener('click', ()=>{
+    overlay.classList.add('hidden')
+    popup_prof.classList.add('hidden')
+})
