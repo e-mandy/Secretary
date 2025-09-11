@@ -44,7 +44,7 @@ class DocumentController extends Controller
 
             Document::create([
                 'nom' => $filename,
-                'id_professor' => $request->id_professeur,
+                'id_professor' => $request->id_professor,
                 'type_id' => $request->type_id
             ]);
 

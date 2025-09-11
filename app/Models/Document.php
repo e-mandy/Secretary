@@ -27,8 +27,8 @@ class Document extends Model
         return $date->isoFormat('DD/MM/YYYY');
     }
 
-    public function type(): HasOne
+    public function type(): BelongsTo
     {
-        return $this->hasOne(Type::class, 'type_id', 'id');
+        return $this->belongsTo(Type::class, 'type_id');
     }
 }
