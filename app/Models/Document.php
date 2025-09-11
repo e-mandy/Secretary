@@ -19,7 +19,7 @@ class Document extends Model
 
     public function professeur(): BelongsTo
     {
-        return $this->belongsTo(Professeur::class, 'id_professor', 'id');
+        return $this->belongsTo(Professeur::class, 'id_professor');
     }
 
     public function getDateCreatedAtAttribute(){

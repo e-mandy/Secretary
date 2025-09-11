@@ -67,7 +67,7 @@ class DocumentController extends Controller
      */
     public function edit(Document $document)
     {
-        //
+        return view('document.edit', compact('document'));
     }
 
     /**
