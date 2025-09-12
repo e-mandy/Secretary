@@ -23,8 +23,7 @@ class UpdateDocumentRequest extends FormRequest
     {
         return [
             "type_id" => ['required', 'exists:types,id', 'bail'],
-            "document" => ['nullable', 'file', 'mimes:pdf,docx,jpeg,png,jpg', 'max:5128'],
-            "prof_fullname" => ['required', 'string']
+            "document" => ['nullable', 'file', 'mimes:pdf,docx,jpeg,png,jpg', 'max:5128']
         ];
     }
 }

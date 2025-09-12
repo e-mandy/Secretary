@@ -41,7 +41,9 @@ class DocumentController extends Controller
             $file = $request->file('document');
 
             $prof_info = Professeur::where('id', $request->id_professeur)->first(['lastname', 'firstname']);
-            $filename = "{trim($prof_info->lastname})_{trim($prof_info->firstname)}_{$request->type}.{$file->extension()}";
+            $prof_type_doc = Type::select('nom')->where('id', $request->type_id)->first()['nom'];
+
+            $filename = "{$prof_info->lastname}_{$prof_info->firstname}_{$prof_type_doc}.{$file->extension()}";
 
             Document::create([
                 'nom' => $filename,
@@ -86,10 +88,16 @@ class DocumentController extends Controller
         ]);
 
         if($request->hasFile('document')){
-            $stored_file = Storage::get($document->nom);
-            $extension = pathinfo($stored_file, PATHINFO_EXTENSION);
+            $last_stored_file = Storage::get($document->nom);
+            $extension = pathinfo($last_stored_file, PATHINFO_EXTENSION);
 
+            $striping_last_filename = explode(".{$extension}", $document->nom);
 
+            $new_filename = "{$striping_last_filename[0]}.{$request->file('document')->extension()}";
+
+            $document->update([
+                'nom' => $new_filename
+            ]);
         }
 
         return to_route('admin.documents.index');

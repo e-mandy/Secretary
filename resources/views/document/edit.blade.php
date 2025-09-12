@@ -36,9 +36,9 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-8">
-                    <label class="flex flex-col gap-1" for="lastname">
+                    <label class="flex flex-col gap-1" for="prof_fullname">
                         Nom et Prénom du Professeur
-                        <input class="outline-none border border-gray-200 py-[6px] px-3 w-full rounded" value="{{ old('lastname', $document->professeur->lastname) }} {{ old('firstname', $document->professeur->firstname) }}" type="text" id="prof_fullname" name="prof_fullname" disabled>
+                        <input class="outline-none border border-gray-200 py-[6px] px-3 w-full rounded" value="{{ old('lastname', $document->professeur->lastname) }} {{ old('firstname', $document->professeur->firstname) }}" type="text" id="prof_fullname" disabled>
                     </label>
                     <label for="type_id" class="font-medium flex flex-col gap-1">
                         Type de document

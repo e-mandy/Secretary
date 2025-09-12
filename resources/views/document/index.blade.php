@@ -87,7 +87,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <form action="" method="POST">
+                                            <form action="{{ route('admin.documents.destroy', $document) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="flex gap-3 items-center hover:bg-gray-200 p-1 rounded text-red-600 cursor-pointer" type="submit">
