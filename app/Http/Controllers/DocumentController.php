@@ -95,9 +95,12 @@ class DocumentController extends Controller
 
             $new_filename = "{$striping_last_filename[0]}.{$request->file('document')->extension()}";
 
+            Storage::disk('public')->delete("documents/{$document->nom}");
             $document->update([
                 'nom' => $new_filename
             ]);
+
+            $request->file('document')->storeAs('documents', $new_filename, 'public');
         }
 
         return to_route('admin.documents.index');
@@ -115,6 +118,7 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
+        Storage::disk('public')->delete("documents/{$document->nom}");
         $document->delete();
 
         return redirect()->route('admin.documents.index')->with('status', "Document supprimé avec succès");
