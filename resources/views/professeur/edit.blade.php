@@ -62,7 +62,7 @@
                 <div>
                     <label class="flex flex-col gap-1 w-1/2" for="specialite">
                         Spécialité
-                        <input class="outline-none border border-gray-200 py-[6px] px-3 w-full rounded" value="{{ old('specialite', $professeur->specialite) }}" type="text" id="specialite" name="specialité">
+                        <input class="outline-none border border-gray-200 py-[6px] px-3 w-full rounded" value="{{ old('specialite', $professeur->specialite) }}" type="text" id="specialite" name="specialite">
                     </label>
                 </div>
             </section>

@@ -94,9 +94,12 @@ class PVSoutenanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(PVSoutenance $pv_soutenance)
     {
-        //
+        return view('pv_soutenance.edit', [
+            'pv_soutenance' => $pv_soutenance,
+            'filieres' => Filiere::all()
+        ]);
     }
 
     /**
@@ -104,7 +107,7 @@ class PVSoutenanceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
+        //
     }
 
     /**
