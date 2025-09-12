@@ -69,11 +69,11 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <button class="block p-1 rounded-lg border border-gray-300 cursor-pointer">
+                        <a href="{{ route('admin.documents.download', $document) }}" class="block p-1 rounded-lg border border-gray-300 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
                             </svg>
-                        </button>
+                        </a>
                         {{-- <form action="{{ route('admin.documents.destroy', $document) }}" method="POST">
                             @csrf
                             @method('DELETE')

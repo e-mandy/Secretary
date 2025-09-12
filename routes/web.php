@@ -32,6 +32,9 @@ Route::group([
 
     Route::resource('/professeurs', ProfesseurController::class);
     Route::resource('/documents', DocumentController::class);
+    //Controller de download de fichier
+    Route::get('/documents/{document}/', [DocumentController::class, 'download'])->name('documents.download');
+
     Route::resource('/pv_soutenance', PVSoutenanceController::class);
 
     Route::prefix('settings')->as('settings.')->group(function(){

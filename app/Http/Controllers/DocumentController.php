@@ -43,7 +43,7 @@ class DocumentController extends Controller
             $prof_info = Professeur::where('id', $request->id_professeur)->first(['lastname', 'firstname']);
             $prof_type_doc = Type::select('nom')->where('id', $request->type_id)->first()['nom'];
 
-            $filename = "{$prof_info->lastname}_{$prof_info->firstname}_{$prof_type_doc}.{$file->extension()}";
+            $filename = str_replace(" ", "", "{$prof_info->lastname}_{$prof_info->firstname}_{$prof_type_doc}.{$file->extension()}");
 
             Document::create([
                 'nom' => $filename,
@@ -93,7 +93,7 @@ class DocumentController extends Controller
 
             $striping_last_filename = explode(".{$extension}", $document->nom);
 
-            $new_filename = "{$striping_last_filename[0]}.{$request->file('document')->extension()}";
+            $new_filename = str_replace(" ", "", "{$striping_last_filename[0]}.{$request->file('document')->extension()}");
 
             Storage::disk('public')->delete("documents/{$document->nom}");
             $document->update([
@@ -109,8 +109,10 @@ class DocumentController extends Controller
     /**
      * Download the specified document from the storage
      */
-    public function download(){
-        //
+    public function download(Document $document){
+        $path = storage_path("app/public/documents/$document->nom");
+
+        return response()->download($path);
     }
 
     /**
