@@ -32,24 +32,6 @@
                 </h6>
                 <span class="text-3xl text-blue-700">{{ $nbr_pv }}</span>
             </div>
-            <div class="bg-green-200 p-4 rounded-lg shadow opacity-75">
-                <h6 class="font-medium mb-4 flex justify-between text-green-900">
-                    Terminées
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                </h6>
-                <span class="text-3xl text-blue-700"></span>
-            </div>
-            <div class="bg-orange-200 p-4 rounded-lg shadow opacity-75">
-                <h6 class="font-medium mb-4 flex justify-between text-orange-900">
-                    En préparation
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                </h6>
-                <span class="text-3xl text-blue-700"></span>
-            </div>
         </section>
         <section class="bg-white px-6 py-6">
             <div class="flex justify-between items-center mb-5">
@@ -105,12 +87,6 @@
                                     </svg>
                                     {{ $pv_soutenance->heure }}
                                 </p>
-                                <p class="flex gap-2 mb-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819" />
-                                    </svg>
-                                    Salle OB
-                                </p>
                             </div>
                             <div>
                                 <h3 class="text-gray-600 font-medium mb-3">JURY</h3>
@@ -141,7 +117,23 @@
                                 </p>
                                 <p class="flex items-center justify-between">
                                     Mention:
-                                    <span class="text-xl py-1 px-4 bg-blue-400 rounded-2xl text-white hover:bg-black hover:text-blue-400">{{ $pv_soutenance->mention }}</span>
+                                    @switch($pv_soutenance->mention)
+                                        @case("passable")
+                                            <span class="text-xl py-1 px-4 bg-red-400 rounded-2xl text-white hover:bg-black hover:text-red-400">Passable</span>
+                                            @break
+
+                                        @case("abien")
+                                            <span class="text-xl py-1 px-4 bg-orange-400 rounded-2xl text-white hover:bg-black hover:text-orange-400">Assez Bien</span>
+                                            @break
+
+                                        @case("bien")
+                                            <span class="text-xl py-1 px-4 bg-blue-400 rounded-2xl text-white hover:bg-black hover:text-blue-400">Bien</span>
+                                            @break
+
+                                        @case("tbien")
+                                            <span class="text-xl py-1 px-4 bg-green-400 rounded-2xl text-white hover:bg-black hover:text-green-400">Très Bien</span>
+                                            @break
+                                    @endswitch
                                 </p>
                             </div>
                         </div>
@@ -176,10 +168,6 @@
                         Date
                         <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="date" name="soutenance_date" id="soutenance_date" required>
                     </label>
-                    <label for="heure" class="font-medium flex flex-col gap-1 w-[48%] text-sm">
-                        Heure
-                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="time" name="heure" id="heure" required>
-                    </label>
                 </div>
                 <div class="mb-4">
                     <label for="jurys" class="font-medium flex flex-col gap-1 text-sm">
@@ -190,18 +178,7 @@
                 <div class="flex items-center w-full justify-between mb-4">
                     <label for="note" class="font-medium flex flex-col gap-1 w-[48%] text-sm">
                         Note
-                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="text" name="note" id="note" placeholder="Ex: 16/20" required>
-                    </label>
-                    <label for="mention" class="font-medium flex flex-col gap-1 w-[48%] text-sm">
-                        Mention
-                        <select class="border border-gray-200 rounded-lg p-2 text-gray-500" name="mention" id="mention">
-                            <option value="passable">Sélectionner la mention</option>
-                            <option value="passable">Passable</option>
-                            <option value="Abien">Assez bien</option>
-                            <option value="bien">Bien</option>
-                            <option value="Tbien">Très Bien</option>
-                            <option value="excellent">Excellent</option>
-                        </select>
+                        <input class="outline-none border border-gray-200 py-2 px-2 rounded" type="number" name="note" id="note" placeholder="Ex: 16" required>
                     </label>
                 </div>
                 <div class="mb-4">

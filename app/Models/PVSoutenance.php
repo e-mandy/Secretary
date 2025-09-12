@@ -10,7 +10,6 @@ class PvSoutenance extends Model
     protected $fillable = [
         "nom_etu",
         "soutenance_date",
-        "heure",
         "jurys",
         "note",
         "mention",

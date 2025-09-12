@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePVSoutenanceRequest extends FormRequest
+class UpdatePVSoutenanceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,12 +22,7 @@ class StorePVSoutenanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nom_etu" => ['required', 'string', 'max:255'],
-            "soutenance_date" => ['date', 'required'],
-            "jurys" => ['required', 'string'],
-            "note" => ['required', 'decimal:0,2'],
-            "pv_file" => ['file', 'mimes:pdf', 'max:8192', 'nullable'],
-            "id_filiere" => ['required', 'integer']
+            //
         ];
     }
 }

@@ -39,10 +39,31 @@ class PVSoutenanceController extends Controller
     {
         $validateFields = $request->validated();
 
+        $mention = "";
 
-        $created_pv = PVSoutenance::create(
-            $validateFields,
-        );
+        switch(true){
+            case($request->note >= 10 && $request->note < 12):
+                $mention = "passable";
+                break;
+
+            case($request->note >= 12 && $request->note < 14):
+                $mention = "abien";
+                break;
+
+            case($request->note >= 14 && $request->note < 16):
+                $mention = "bien";
+                break;
+
+            case($request->note >= 16 && $request->note < 20):
+                $mention = "tbien";
+                break;
+        }
+
+
+        $created_pv = PVSoutenance::create([
+            ...$validateFields,
+            'mention' => $mention
+        ]);
 
 
 
@@ -83,7 +104,7 @@ class PVSoutenanceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**
