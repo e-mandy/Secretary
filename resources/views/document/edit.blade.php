@@ -26,7 +26,7 @@
                 <p class="text-[#71717A]">Modifiez les informations du document</p>
             </div>
         </div>
-        <form action="#" method="POST">
+        <form action="{{ route('admin.documents.update', $document) }}" method="POST">
             @csrf
             @method('PUT')
             <section class="bg-white p-6 rounded-lg shadow mb-10">
@@ -37,12 +37,16 @@
 
                 <div class="grid grid-cols-2 gap-8">
                     <label class="flex flex-col gap-1" for="lastname">
-                        Nom de Professeur
-                        <input class="outline-none border border-gray-200 py-[6px] px-3 w-full rounded" value="{{ old('lastname', $document->professeur->lastname) }}" type="text"id="lastname" name="lastname">
+                        Nom et Prénom du Professeur
+                        <input class="outline-none border border-gray-200 py-[6px] px-3 w-full rounded" value="{{ old('lastname', $document->professeur->lastname) }} {{ old('firstname', $document->professeur->firstname) }}" type="text" id="prof_fullname" name="prof_fullname" disabled>
                     </label>
-                    <label class="flex flex-col gap-1" for="firstname">
+                    <label for="type_id" class="font-medium flex flex-col gap-1">
                         Type de document
-                        <input class="outline-none border border-gray-200 py-[6px] px-3 w-full rounded" value="{{ old('firstname', $document->professeur->firstname) }}" type="text" id="firstname" name="firstname">
+                        <select class="outline-none border border-gray-200 py-2 px-2 rounded" name="type_id" id="type_id">
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}" @selected($document->type->id == $type->id)>{{ $type->nom }}</option>
+                            @endforeach
+                        </select>
                     </label>
                 </div>
             </section>
@@ -60,8 +64,8 @@
                             </svg>
                         </span>
                         <div>
-                            <h4 class="font-medium text-lg">CV_John_Doe.pdf</h4>
-                            <p class="text-sm text-gray-500">° Uploadé le 12/04/2025</p>
+                            <h4 class="font-medium text-lg">{{ $document->nom }}</h4>
+                            <p class="text-sm text-gray-500">Uploadé le {{ $document->date_created_at }}</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
@@ -70,16 +74,20 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
                             </svg>
                         </button>
-                        <button class="block p-1 rounded-lg border border-gray-300 cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                            </svg>
-                        </button>
+                        {{-- <form action="{{ route('admin.documents.destroy', $document) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="block p-1 rounded-lg border border-gray-300 cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                </svg>
+                            </button>
+                        </form> --}}
                     </div>
                 </div>
                 <div class="mb-4">
                     <p class="mb-2 font-medium">Remplacer le fichier (optionnel)</p>
-                    <label class="flex flex-col items-center mb-1 border-2 border-dashed border-gray-300 rounded-lg mx-auto py-6 hover:border-blue-500" for="">
+                    <label class="flex flex-col items-center mb-1 border-2 border-dashed border-gray-300 rounded-lg mx-auto py-6 hover:border-blue-500 cursor-pointer" for="document">
                         <span class="bg-gray-200 p-1 rounded-lg mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
@@ -93,12 +101,12 @@
                             </svg>
                             Choisir un fichier
                         </span>
-                        <input class="hidden" type="file" name="" id="">
+                        <input class="hidden" type="file" name="document" id="document">
                     </label>
                 </div>
             </section>
             <section class="flex gap-4 justify-end">
-                <a href="#" class="add_prof flex items-center bg-white border border-gray-300 text-black rounded-lg px-3 py-2 gap-4 cursor-pointer">
+                <a href="{{ route('admin.documents.index') }}" class="add_prof flex items-center bg-white border border-gray-300 text-black rounded-lg px-3 py-2 gap-4 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>

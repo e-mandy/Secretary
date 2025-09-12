@@ -22,7 +22,7 @@ class StoreDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['string', 'in:CV,Diplôme'],
+            'type_id' => ['required', 'exists:types,id', 'bail'],
             'document' => ['file','mimes:pdf,docx,jpeg,png,jpg', 'max:5128'],
             'id_professeur' => ['required', 'integer']
         ];

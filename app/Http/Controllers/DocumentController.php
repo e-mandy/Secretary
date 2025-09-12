@@ -7,6 +7,7 @@ use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
 use App\Models\Professeur;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
@@ -40,11 +41,11 @@ class DocumentController extends Controller
             $file = $request->file('document');
 
             $prof_info = Professeur::where('id', $request->id_professeur)->first(['lastname', 'firstname']);
-            $filename = "{$prof_info->lastname}_{$prof_info->firstname}_{$request->type}.{$file->getClientOriginalExtension()}";
+            $filename = "{trim($prof_info->lastname})_{trim($prof_info->firstname)}_{$request->type}.{$file->extension()}";
 
             Document::create([
                 'nom' => $filename,
-                'id_professor' => $request->id_professor,
+                'id_professor' => $request->id_professeur,
                 'type_id' => $request->type_id
             ]);
 
@@ -67,7 +68,10 @@ class DocumentController extends Controller
      */
     public function edit(Document $document)
     {
-        return view('document.edit', compact('document'));
+        return view('document.edit', [
+            'document' => $document,
+            'types' => Type::all()
+        ]);
     }
 
     /**
@@ -75,6 +79,26 @@ class DocumentController extends Controller
      */
     public function update(UpdateDocumentRequest $request, Document $document)
     {
+        $validated = $request->validated();
+
+        $document->update([
+            "type_id" => $validated['type_id'],
+        ]);
+
+        if($request->hasFile('document')){
+            $stored_file = Storage::get($document->nom);
+            $extension = pathinfo($stored_file, PATHINFO_EXTENSION);
+
+
+        }
+
+        return to_route('admin.documents.index');
+    }
+
+    /**
+     * Download the specified document from the storage
+     */
+    public function download(){
         //
     }
 
@@ -83,6 +107,8 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        //
+        $document->delete();
+
+        return redirect()->route('admin.documents.index')->with('status', "Document supprimé avec succès");
     }
 }
