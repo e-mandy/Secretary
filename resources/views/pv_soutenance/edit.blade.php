@@ -14,7 +14,7 @@
     </div>
     <section class="pb-8">
         <div class="flex items-center mb-10 gap-4">
-            <a href="#" class="flex bg-white h-fit py-1 px-2 rounded-sm gap-1 items-center border border-gray-300">
+            <a href="{{ route('admin.pv_soutenance.index') }}" class="flex bg-white h-fit py-1 px-2 rounded-sm gap-1 items-center border border-gray-300">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
                 </svg>
@@ -25,7 +25,7 @@
                 <p class="text-[#71717A]">Modifiez les informations du pv de soutenance de l'étudiant</p>
             </div>
         </div>
-        <form action="#" method="POST">
+        <form action="{{ route('admin.pv_soutenance.update', $pv_soutenance) }}" method="POST">
             @csrf
             @method('PUT')
             <section class="bg-white p-6 rounded-lg shadow mb-10">
@@ -37,8 +37,8 @@
                 <div class="flex items-center gap-4 mb-3">
                     <span class="block rounded-[50%] w-14 h-14 p-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white font-bold text-center">JD</span>
                     <div class="flex flex-col gap-1">
-                        <h3 class="text-xl font-bold">John Doe</h2>
-                        <span class="block py-[2px] px-2 border border-gray-300 rounded-xl text-blue-700 text-xs hover:bg-gray-800 text-center">Master</span>
+                        <h3 class="text-xl font-bold">{{ $pv_soutenance->nom_etu }}</h2>
+                        <span class="block py-[2px] px-2 border border-gray-300 rounded-xl text-blue-700 text-xs hover:bg-gray-800 text-center">{{ $pv_soutenance->filiere->nom }}</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-8">
@@ -162,7 +162,7 @@
                 </div>
             </section>
             <div class="flex gap-4 justify-end">
-                <a href="#" class="add_prof flex items-center bg-white border border-gray-300 text-black rounded-lg px-3 py-2 gap-4 cursor-pointer">
+                <a href="{{ route('admin.pv_soutenance.index') }}" class="add_prof flex items-center bg-white border border-gray-300 text-black rounded-lg px-3 py-2 gap-4 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>

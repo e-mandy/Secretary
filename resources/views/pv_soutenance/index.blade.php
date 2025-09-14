@@ -55,7 +55,7 @@
             </div>
             <section>
                 @foreach($pv_soutenances as $pv_soutenance)
-                    <div class="rounded-lg border border-gray-300 p-4">
+                    <div class="rounded-lg border border-gray-300 p-4 mb-6">
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex gap-4 items-center">
                                 <span class="h-14 w-14 rounded-[50%] border-2 border-white shadow-lg p-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white font-bold flex justify-center items-center text-3xl">{{ $pv_soutenance->nom_etu[0] }}</span>
@@ -147,30 +147,88 @@
                                 <h3 class="text-gray-600 font-medium uppercase mb-3">Résultats</h3>
                                 <p class="flex mb-4 text-sm items-center justify-between">
                                     Note:
-                                    <span>{{ $pv_soutenance->note }}</span>
+                                    <span class="text-lg font-semibold">{{ $pv_soutenance->note }}/20</span>
                                 </p>
                                 <p class="flex items-center justify-between">
                                     Mention:
                                     @switch($pv_soutenance->mention)
                                         @case("passable")
-                                            <span class="text-xl py-1 px-4 bg-red-400 rounded-2xl text-white hover:bg-black hover:text-red-400">Passable</span>
+                                            <span class="text-sm py-1 px-4 bg-red-400 rounded-2xl text-white hover:bg-black hover:text-red-400">Passable</span>
                                             @break
 
                                         @case("abien")
-                                            <span class="text-xl py-1 px-4 bg-orange-400 rounded-2xl text-white hover:bg-black hover:text-orange-400">Assez Bien</span>
+                                            <span class="text-sm py-1 px-4 bg-orange-400 rounded-2xl text-white hover:bg-black hover:text-orange-400">Assez Bien</span>
                                             @break
 
                                         @case("bien")
-                                            <span class="text-xl py-1 px-4 bg-blue-400 rounded-2xl text-white hover:bg-black hover:text-blue-400">Bien</span>
+                                            <span class="text-sm py-1 px-4 bg-blue-400 rounded-2xl text-white hover:bg-black hover:text-blue-400">Bien</span>
                                             @break
 
                                         @case("tbien")
-                                            <span class="text-xl py-1 px-4 bg-green-400 rounded-2xl text-white hover:bg-black hover:text-green-400">Très Bien</span>
+                                            <span class="text-sm py-1 px-4 bg-green-400 rounded-2xl text-white hover:bg-black hover:text-green-400">Très Bien</span>
                                             @break
                                     @endswitch
                                 </p>
                             </div>
                         </div>
+                        <hr class="mb-6">
+                        <div class="flex justify-between mb-6">
+                            <p class="flex gap-2 items-center uppercase text-gray-500 text-lg font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                </svg>
+                                Procès-verbal
+                            </p>
+                            @if($pv_soutenance->pv_file)
+                                <span class="flex gap-1 items-center w-fit py-1 px-4 bg-blue-300 rounded-xl text-blue-700 text-xs hover:bg-gray-800 text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                                    </svg>
+                                    Fichier uploadé
+                                </span>
+                            @endif
+                        </div>
+                        @if ($pv_soutenance->pv_file)
+                            <div class="flex justify-between items-center border-dashed p-3 rounded-lg border-green-300 border-2 bg-green-50">
+                                <div class="flex items-center gap-4">
+                                    <span class="block p-2 bg-green-200 rounded-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                        </svg>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-medium">Nom du document.extension</h4>
+                                        <p class="text-sm text-gray-400">Uploadé le 28/09/2024</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="block bg-white border border-gray-300 p-2 rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        @else
+                            <div class="mb-4">
+                                <label class="flex flex-col items-center mb-1 border-2 border-dashed border-gray-300 rounded-lg mx-auto p-4 hover:border-blue-500" for="pv_file">
+                                    <span class="bg-gray-200 p-2 rounded-lg mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="gray" class="size-8">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                                        </svg>
+                                    </span>
+                                    <h5 class="font-medium">Téléchargez le PV de Soutenance</h5>
+                                    <p class="text-sm text-gray-500 font-medium mb-2">PDF jusqu'à 8mo.</p>
+                                    <span class="flex gap-4 border border-gray-300 text-sm font-medium p-2 rounded-lg items-center cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 xs:hidden sm:block">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                                        </svg>
+                                        Choisir un fichier
+                                    </span>
+                                    <input class="hidden" type="file" name="pv_file" id="pv_file">
+                                </label>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </section>
