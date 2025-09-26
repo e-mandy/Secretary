@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -31,8 +32,21 @@ class AuthController extends Controller
         return redirect('/admin/dashboard')->with('success', "Sign up established");
     }
 
-    public function login(){
-        //
+    public function login(Request $request){
+        $validate = $request->validate([
+            "email" => ["email", "required", "string"],
+            "password" => ["required", Password::min(8)
+                                            ->letters()
+                                            ->numbers()
+                                            ->symbols()
+            ]
+        ]);
+
+        if(!Auth::attempt($validate)){
+            return back();
+        }
+
+        return to_route('admin.dashboard');
     }
 
 }
