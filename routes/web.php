@@ -20,6 +20,8 @@ Route::prefix('admin')->as('admin.')->group(function(){
     })->name('login');
 
     Route::post('/register', [AuthController::class, 'register'])->name('register.store');
+
+    Route::post('/connexion', [AuthController::class, 'login'])->name('login.store');
 });
 
 Route::group([

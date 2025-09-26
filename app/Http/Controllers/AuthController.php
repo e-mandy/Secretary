@@ -30,4 +30,9 @@ class AuthController extends Controller
 
         return redirect('/admin/dashboard')->with('success', "Sign up established");
     }
+
+    public function login(){
+        //
+    }
+
 }

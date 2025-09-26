@@ -12,6 +12,7 @@
         "doctrine/dbal": "*",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "livewire/flux": "*",
         "livewire/livewire": "^3.6",
         "owenvoke/blade-fontawesome": "^2.9"
     },
