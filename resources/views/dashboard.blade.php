@@ -17,8 +17,8 @@
                 <x-slot:icon>
                     <x-heroicon-s-users class="h-6 w-6" />
                 </x-slot>
-                <x-slot:value>19</x-slot>
-                <x-slot:date>Ce mois ci</x-slot>
+                <x-slot:value>{{ $prof['number'] }}</x-slot>
+                <x-slot:date>{{ $prof['last_change'] }}</x-slot>
             </x-card.header>
             <x-card.header>
                 <x-slot:title>
@@ -27,8 +27,8 @@
                 <x-slot:icon>
                     <x-heroicon-o-document-text class="h-6 w-6" />
                 </x-slot>
-                <x-slot:value>10</x-slot>
-                <x-slot:date>Ce mois ci</x-slot>
+                <x-slot:value>{{ $document['number'] }}</x-slot>
+                <x-slot:date>{{ $document['last_change'] }}</x-slot>
             </x-card.header>
             <x-card.header>
                 <x-slot:title>
@@ -37,8 +37,8 @@
                 <x-slot:icon>
                     <x-fas-graduation-cap class="h-6 w-6" />
                 </x-slot>
-                <x-slot:value>30</x-slot>
-                <x-slot:date>Ce mois ci</x-slot>
+                <x-slot:value>{{ $pv_soutenance['number'] }}</x-slot>
+                <x-slot:date>{{ $pv_soutenance['last_change'] }}</x-slot>
             </x-card.header>
         </section>
         <section class="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
