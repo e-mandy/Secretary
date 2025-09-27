@@ -7,10 +7,6 @@ use App\Http\Controllers\PVSoutenanceController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
 Route::prefix('admin')->as('admin.')->group(function(){
     Route::get('/inscription', function(){
         return view('auth.register');
@@ -27,6 +23,7 @@ Route::prefix('admin')->as('admin.')->group(function(){
 Route::group([
     'as' => 'admin.',
     'prefix' => 'admin',
+    'middleware' => 'is_admin'
 ], function() {
     Route::get('/dashboard', function(){
         return view('dashboard');
