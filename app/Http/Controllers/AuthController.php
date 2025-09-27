@@ -49,4 +49,10 @@ class AuthController extends Controller
         return to_route('admin.dashboard');
     }
 
+    public function logout(){
+        Auth::logout();
+
+        return redirect('/admin/connexion');
+    }
+
 }

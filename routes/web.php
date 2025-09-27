@@ -39,4 +39,6 @@ Route::group([
     Route::prefix('settings')->as('settings.')->group(function(){
         Route::get('/', [SettingsController::class, 'index'])->name('index');
     });
+
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
