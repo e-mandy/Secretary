@@ -47,41 +47,35 @@
                 <p class="text-sm text-gray-500">Dernières actions effectuées</p>
 
                 <div class="px-8 mt-4">
-                    @foreach ($document['recents'] as $activity)
-                        @if($activity != null)
+                    @if($document['recents'] != null)
+                        @foreach ($document['recents'] as $activity)
                             <x-card.recent-activity color="green">
                                 <x-slot:message>{{ $activity['message'] }}</x-slot>
                                 <x-slot:name>{{ $activity['value']->nom }} - {{ $activity['value']->type->nom }}</x-slot>
                                 <x-slot:date>{{ $activity['recent_activity'] }}</x-slot>
                             </x-card.recent-activity>
-                        @else
-                            <p>Aucun document récemment ajouté.</p>
-                        @endif
-                    @endforeach
+                        @endforeach
+                    @endif
 
-                    @foreach ($prof['recents'] as $activity)
-                        @if($activity != null)
+                    @if($prof['recents'] != null)
+                        @foreach ($prof['recents'] as $activity)
                             <x-card.recent-activity color="blue">
                                 <x-slot:message>{{ $activity['message'] }}</x-slot>
                                 <x-slot:name>Mr {{ $activity['value']->lastname }} {{ $activity['value']->firstname }}</x-slot>
                                 <x-slot:date>{{ $activity['recent_activity'] }}</x-slot>
                             </x-card.recent-activity>
-                        @else
-                            <p>Aucun professeur récemment ajouté.</p>
-                        @endif
-                    @endforeach
+                        @endforeach
+                    @endif
 
-                    @foreach ($pv_soutenance['recents'] as $activity)
-                        @if($activity != null)
+                    @if($pv_soutenance['recents'] != null)
+                        @foreach ($pv_soutenance['recents'] as $activity)
                             <x-card.recent-activity color="red">
                                 <x-slot:message>{{ $activity['message'] }}</x-slot>
                                 <x-slot:name>Mr {{ $activity['value']->nom_etu }}</x-slot>
                                 <x-slot:date>{{ $activity['recent_activity'] }}</x-slot>
                             </x-card.recent-activity>
-                        @else
-                            <p>Aucun pv de soutenance récemment ajouté.</p>
-                        @endif
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </section>

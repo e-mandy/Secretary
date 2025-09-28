@@ -72,7 +72,7 @@ class DashboardController extends Controller
     }
 
     private function check_last_activities(string $model){
-        $since_two_week = Carbon::now()->subDays(30);
+        $since_two_week = Carbon::now()->subDays(14);
 
         $data_infos = [];
         $output_data = [];
@@ -85,10 +85,10 @@ class DashboardController extends Controller
 
             if($data->created_at > $data->updated_at){
                 $data_infos['recent_activity'] = $this->get_last_change($data->created_at);
-                $data_infos['message'] = `Nouveau {class_basename($model)} ajouté(e)`;
+                $data_infos['message'] = "Nouveau ". class_basename($model) ." ajouté(e)";
             }else{
                 $data_infos['recent_activity'] = $this->get_last_change($data->updated_at);
-                $data_infos['message'] = `{class_basename($model)} mis à jour`;
+                $data_infos['message'] = class_basename($model)." mis à jour";
             }
             $data_infos['value'] = $data;
 
