@@ -64,7 +64,7 @@
             </div>
             <div class="layoutSide hidden grid-cols-3 gap-3">
                 @foreach($professeurs as $professeur)
-                    <div class="bg-white px-4 pt-7 pb-2 rounded-xl border border-gray-300">
+                    <div class="bg-white px-4 pt-7 pb-2 rounded-xl border border-gray-300 hover:scale-105 transition-all duration-150 ease-in-out cursor-pointer">
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-4">
                                 <span class="block rounded-[50%] w-14 h-14 p-4 bg-linear-to-r from-cyan-500 to-blue-500 text-white font-bold text-center">{{ $professeur->lastname[0] }}{{ $professeur->firstname[0] }}</span>

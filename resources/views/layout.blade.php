@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="{{ asset('assets/styles/style.css') }}">
     @include('partials.styles')
     <title>@yield('title')</title>
+    @fluxAppearance
 </head>
-<body class="bg-[#F3F4F6] h-screen">
+<body class="bg-[#F3F4F6] h-screen text-black">
     <aside class="w-[300px] bg-white h-screen px-4 shadow-lg pt-8 fixed">
         @include('partials.sidebar')
     </aside>
     <main class="ml-[300px] min-h-screen px-8 pt-8">
         @yield('content')
     </main>
+    @fluxScripts
 </body>
 </html>
