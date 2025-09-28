@@ -41,33 +41,47 @@
                 <x-slot:date>{{ $pv_soutenance['last_change'] }}</x-slot>
             </x-card.header>
         </section>
-        <section class="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-white p-5 rounded-lg">
+        <section>
+            <div class="w-2/3 bg-white p-5 rounded-lg">
                 <h2 class="text-2xl font-semibold mb-1">Activités récentes</h3>
                 <p class="text-sm text-gray-500">Dernières actions effectuées</p>
 
                 <div class="px-8 mt-4">
-                    <div class="flex justify-between items-center relative mb-4 before:block before:w-2 before:h-2 before:left-[-20px] before:bg-green-600 before:rounded-[50%] before:absolute">
-                        <div>
-                            <h5 class="text-normal">Nouveau document ajouté</h5>
-                            <p class="text-sm text-gray-500">Prof. Martin - CV mise à jour</p>
-                        </div>
-                        <p class="text-sm text-gray-500">Il y a 1 semaine</p>
-                    </div>
-                    <div class="flex justify-between items-center relative mb-4 before:block before:w-2 before:h-2 before:left-[-20px] before:bg-blue-600 before:rounded-[50%] before:absolute">
-                        <div>
-                            <h5 class="text-normal">Nouveau document ajouté</h5>
-                            <p class="text-sm text-gray-500">Prof. Martin - CV mise à jour</p>
-                        </div>
-                        <p class="text-sm text-gray-500">Il y a 2h</p>
-                    </div>
-                    <div class="flex justify-between items-center relative mb-4 before:block before:w-2 before:h-2 before:left-[-20px] before:bg-orange-600 before:rounded-[50%] before:absolute">
-                        <div>
-                            <h5 class="text-normal">Nouveau document ajouté</h5>
-                            <p class="text-sm text-gray-500">Prof. Martin - CV mise à jour</p>
-                        </div>
-                        <p class="text-sm text-gray-500">Hier</p>
-                    </div>
+                    @foreach ($document['recents'] as $activity)
+                        @if($activity != null)
+                            <x-card.recent-activity color="green">
+                                <x-slot:message>{{ $activity['message'] }}</x-slot>
+                                <x-slot:name>{{ $activity['value']->nom }} - {{ $activity['value']->type->nom }}</x-slot>
+                                <x-slot:date>{{ $activity['recent_activity'] }}</x-slot>
+                            </x-card.recent-activity>
+                        @else
+                            <p>Aucun document récemment ajouté.</p>
+                        @endif
+                    @endforeach
+
+                    @foreach ($prof['recents'] as $activity)
+                        @if($activity != null)
+                            <x-card.recent-activity color="blue">
+                                <x-slot:message>{{ $activity['message'] }}</x-slot>
+                                <x-slot:name>Mr {{ $activity['value']->lastname }} {{ $activity['value']->firstname }}</x-slot>
+                                <x-slot:date>{{ $activity['recent_activity'] }}</x-slot>
+                            </x-card.recent-activity>
+                        @else
+                            <p>Aucun professeur récemment ajouté.</p>
+                        @endif
+                    @endforeach
+
+                    @foreach ($pv_soutenance['recents'] as $activity)
+                        @if($activity != null)
+                            <x-card.recent-activity color="red">
+                                <x-slot:message>{{ $activity['message'] }}</x-slot>
+                                <x-slot:name>Mr {{ $activity['value']->nom_etu }}</x-slot>
+                                <x-slot:date>{{ $activity['recent_activity'] }}</x-slot>
+                            </x-card.recent-activity>
+                        @else
+                            <p>Aucun pv de soutenance récemment ajouté.</p>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </section>
