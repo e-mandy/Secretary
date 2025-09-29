@@ -159,6 +159,9 @@ class PVSoutenanceController extends Controller
      */
     public function destroy(ModelsPvSoutenance $pv_soutenance)
     {
-        //
+        Storage::disk('public')->delete("pv_soutenances/{$pv_soutenance->nom_etu}");
+        $pv_soutenance->delete();
+
+        return redirect()->route('admin.pv_soutenance.index');
     }
 }
