@@ -25,7 +25,7 @@
                 <p class="text-[#71717A]">Modifiez les informations du pv de soutenance de l'étudiant</p>
             </div>
         </div>
-        <form action="{{ route('admin.pv_soutenance.update', $pv_soutenance) }}" method="POST">
+        <form action="{{ route('admin.pv_soutenance.update', $pv_soutenance) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <section class="bg-white p-6 rounded-lg shadow mb-10">
@@ -55,9 +55,9 @@
                             @endforeach
                         </select>
                     </label>
-                    <label class="flex flex-col gap-1" for="date">
+                    <label class="flex flex-col gap-1" for="soutenance_date">
                         Date
-                        <input class="outline-none border border-gray-200 py-[6px] px-3 w-full rounded" value="{{ $pv_soutenance->soutenance_date }}" type="date" id="date" name="date">
+                        <input class="outline-none border border-gray-200 py-[6px] px-3 w-full rounded" value="{{ $pv_soutenance->soutenance_date }}" type="date" id="soutenance_date" name="soutenance_date">
                     </label>
                 </div>
             </section>

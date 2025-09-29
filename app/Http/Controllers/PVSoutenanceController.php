@@ -145,7 +145,7 @@ class PVSoutenanceController extends Controller
 
             Storage::move($last_filename, $filename);
 
-            $updated_pv->update([
+            $pv_soutenance->update([
                 "pv_file" => $filename
             ]);
         }
