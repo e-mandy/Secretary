@@ -24,6 +24,7 @@ class PvSoutenance extends Model
     }
 
     public function getDateCreatedAtAttribute(){
+        Carbon::setLocale('fr');
         $date = Carbon::parse($this->created_at);
         return $date->isoFormat('DD/MM/YYYY');
     }

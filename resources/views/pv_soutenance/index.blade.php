@@ -53,7 +53,6 @@
                                 </div>
                             </div>
                             <div class="flex gap-5 items-center">
-                                <span class="font-medium text-sm">Terminée</span>
                                 <div class="voirButton p-1 hover:bg-gray-300 rounded cursor-pointer relative">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
@@ -101,13 +100,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                                     </svg>
-                                    {{ $pv_soutenance->date }}
-                                </p>
-                                <p class="flex gap-2 mb-2 text-sm items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                    </svg>
-                                    {{ $pv_soutenance->heure }}
+                                    {{ $pv_soutenance->date_created_at }}
                                 </p>
                             </div>
                             <div>
@@ -142,14 +135,14 @@
                                 </p>
                             </div>
                         </div>
-                        <hr class="mb-6">
-                        <div class="flex justify-between mb-6">
-                            <p class="flex gap-2 items-center uppercase text-gray-500 text-lg font-medium">
+                        {{-- <hr class="mb-6"> --}}
+                        <div class="flex justify-between">
+                            {{-- <p class="flex gap-2 items-center uppercase text-gray-500 text-lg font-medium">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                                 </svg>
                                 Procès-verbal
-                            </p>
+                            </p> --}}
                             @if($pv_soutenance->pv_file)
                                 <span class="flex gap-1 items-center w-fit py-1 px-4 bg-blue-300 rounded-xl text-blue-700 text-xs hover:bg-gray-800 text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -181,7 +174,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="mb-4">
+                            {{-- <div class="mb-4">
                                 <label class="flex flex-col items-center mb-1 border-2 border-dashed border-gray-300 rounded-lg mx-auto p-4 hover:border-blue-500" for="pv_file">
                                     <span class="bg-gray-200 p-2 rounded-lg mb-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="gray" class="size-8">
@@ -198,7 +191,7 @@
                                     </span>
                                     <input class="hidden" type="file" name="pv_file" id="pv_file">
                                 </label>
-                            </div>
+                            </div> --}}
                         @endif
                     </div>
                 @endforeach
