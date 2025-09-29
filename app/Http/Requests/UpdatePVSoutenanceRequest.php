@@ -24,7 +24,6 @@ class UpdatePVSoutenanceRequest extends FormRequest
         return [
             "nom_etu" => ['required', 'string', 'max:255'],
             "soutenance_date" => ['date', 'required'],
-            "jurys" => ['required', 'string'],
             "note" => ['required', 'decimal:0,2'],
             "pv_file" => ['file', 'mimes:pdf', 'max:8192', 'nullable'],
             "id_filiere" => ['required', 'integer']
