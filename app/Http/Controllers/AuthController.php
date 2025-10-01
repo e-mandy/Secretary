@@ -43,8 +43,12 @@ class AuthController extends Controller
         ]);
 
         if(!Auth::attempt($validate)){
+            flash()->error("Email ou mot de passe incorrect");
+
             return back();
         }
+
+        flash()->success("Connexion réussie. Bon retour parmi nous.");
 
         return to_route('admin.dashboard');
     }
@@ -52,6 +56,7 @@ class AuthController extends Controller
     public function logout(){
         Auth::logout();
 
+        flash()->info("Utilisateur déconnecté");
         return redirect('/admin/connexion');
     }
 

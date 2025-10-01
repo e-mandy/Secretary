@@ -43,6 +43,8 @@ class ProfesseurController extends Controller
             'status' => "Incomplet"
         ]);
 
+        flash()->success("Ajout du professeur éffectué avec succès");
+
         return redirect('/admin/professeurs')->with('success', "Nouveau professeur ajouté");
     }
 
@@ -74,6 +76,8 @@ class ProfesseurController extends Controller
             'status' => "Incomplet",
         ]);
 
+        flash()->success("Modification du professeur éffectuée avec succès");
+
         return to_route('admin.professeurs.index')->with('success', "Nouveau professeur ajouté");
     }
 
@@ -84,6 +88,7 @@ class ProfesseurController extends Controller
     {
         $professeur->delete();
 
+        flash()->success("Suppression du professeur éffectuée avec succès");
         return redirect()->route('admin.professeurs.index')->with('success', "Professeur supprimé avec succès");
     }
 }

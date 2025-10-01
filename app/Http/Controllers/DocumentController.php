@@ -53,6 +53,8 @@ class DocumentController extends Controller
 
             $file->storeAs('documents', $filename, 'public');
 
+            flash()->success("Document crée avec succès");
+
             return to_route('admin.documents.index');
         }
     }
@@ -88,20 +90,25 @@ class DocumentController extends Controller
         ]);
 
         if($request->hasFile('document')){
-            $last_stored_file = Storage::get($document->nom);
-            $extension = pathinfo($last_stored_file, PATHINFO_EXTENSION);
+            $currentExtension = pathinfo($document->nom, PATHINFO_EXTENSION);
+            $currentBasename = pathinfo($document->nom, PATHINFO_FILENAME);
 
-            $striping_last_filename = explode(".{$extension}", $document->nom);
+            $newExtension = $request->file('document')->extension();
+            $newFilename = str_replace(" ", "", "{$currentBasename}.{$newExtension}");
 
-            $new_filename = str_replace(" ", "", "{$striping_last_filename[0]}.{$request->file('document')->extension()}");
-
+            // Remove the old file from the public/documents directory
             Storage::disk('public')->delete("documents/{$document->nom}");
+
+            // Update the stored filename in the database
             $document->update([
-                'nom' => $new_filename
+                'nom' => $newFilename
             ]);
 
-            $request->file('document')->storeAs('documents', $new_filename, 'public');
+            // Store the new file
+            $request->file('document')->storeAs('documents', $newFilename, 'public');
         }
+
+        flash("Modification du document éffectuée avec succès");
 
         return to_route('admin.documents.index');
     }
@@ -110,8 +117,7 @@ class DocumentController extends Controller
      * Download the specified document from the storage
      */
     public function download(Document $document){
-        $path = storage_path("app/public/documents/$document->nom");
-
+        $path = Storage::disk('public')->path("documents/{$document->nom}");
         return response()->download($path);
     }
 
@@ -123,6 +129,7 @@ class DocumentController extends Controller
         Storage::disk('public')->delete("documents/{$document->nom}");
         $document->delete();
 
+        flash()->success("Document supprimé avec succès");
         return redirect()->route('admin.documents.index')->with('status', "Document supprimé avec succès");
     }
 }
