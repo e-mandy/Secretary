@@ -70,10 +70,10 @@ class PVSoutenanceController extends Controller
 
 
         if($request->hasFile('pv_file')){
-            $filiere_name = Filiere::where('id', $request->id_filiere)->pluck('nom');
+            $target_filiere = Filiere::select('nom')->where('id', $request->id_filiere)->first();
             $file = $request->file('pv_file');
-            $file_ext = $file->getClientOriginalExtension();
-            $filename = "{$validateFields['nom_etu']}_{$filiere_name}.{$file_ext}";
+            $file_ext = $file->extension();
+            $filename = "{$validateFields['nom_etu']}_{$target_filiere->nom}.{$file_ext}";
 
             $file->storeAs('pv_soutenances', $filename, 'public');
 
@@ -110,6 +110,7 @@ class PVSoutenanceController extends Controller
     public function update(UpdatePVSoutenanceRequest $request, PVSoutenance $pv_soutenance)
     {
         $validatedUpdateFields = $request->validated();
+
         $last_filename = $pv_soutenance->pv_file == null ? '' : $pv_soutenance->pv_file;
 
         $mention = "";
@@ -132,16 +133,17 @@ class PVSoutenanceController extends Controller
                 break;
         }
 
-        $updated_pv = $pv_soutenance->update([
+        $pv_soutenance->update([
             ...$validatedUpdateFields,
             'mention' => $mention
         ]);
 
         if($request->hasFile('pv_file')){
-            $filiere_name = Filiere::where('id', $request->id_filiere)->pluck('nom');
+            $target_filiere = Filiere::select('nom')->where('id', $request->id_filiere)->first();
+
             $file = $request->file('pv_file');
-            $file_ext = $file->getClientOriginalExtension();
-            $filename = "{$validatedUpdateFields['nom_etu']}_{$filiere_name}.{$file_ext}";
+            $file_ext = $file->extension();
+            $filename = "{$validatedUpdateFields['nom_etu']}_{$target_filiere->nom}.{$file_ext}";
 
             Storage::move($last_filename, $filename);
 
@@ -152,6 +154,12 @@ class PVSoutenanceController extends Controller
 
         return to_route('admin.pv_soutenance.index');
 
+    }
+
+    public function download(PVSoutenance $pv_soutenance){
+        $path = Storage::disk('public')->path("/pv_soutenances/{$pv_soutenance->pv_file}");
+
+        return response()->download($path);
     }
 
     /**

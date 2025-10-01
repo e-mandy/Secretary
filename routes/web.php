@@ -29,11 +29,14 @@ Route::group([
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/professeurs', ProfesseurController::class);
+
     Route::resource('/documents', DocumentController::class);
     //Controller de download de fichier
     Route::get('/documents/{document}/', [DocumentController::class, 'download'])->name('documents.download');
 
     Route::resource('/pv_soutenance', PVSoutenanceController::class);
+    //Controller de download de pv de soutenance
+    Route::get('/pv_soutenance/{$pv_soutenance}', [PVSoutenanceController::class, 'download'])->name('pv_soutenance.download');
 
     Route::prefix('settings')->as('settings.')->group(function(){
         Route::get('/', [SettingsController::class, 'index'])->name('index');
