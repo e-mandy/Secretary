@@ -20,7 +20,6 @@ class DashboardController extends Controller
         // Récupérer les profs les plus récents
         $recent_profs = $this->check_last_activities(Professeur::class);
 
-
         // Nombre de documents
         $nbr_document = Document::count();
         // Récupérer le dernier document de la liste de document
@@ -37,19 +36,19 @@ class DashboardController extends Controller
 
         $document = [
             "number" => $nbr_document,
-            "last_change" => $this->get_last_change($last_doc->created_at),
+            "last_change" => $this->get_last_change($last_doc !== null ? $last_doc->created_at : null),
             "recents" => $recent_docs
         ];
 
         $prof = [
             "number" => $nbr_prof,
-            "last_change" => $this->get_last_change($last_prof->created_at),
+            "last_change" => $this->get_last_change($last_prof !== null ? $last_prof->created_at : null),
             "recents" => $recent_profs
         ];
 
         $pv_soutenance = [
             "number" => $nbr_pv_soutenance,
-            "last_change" => $this->get_last_change($last_pv_soutenance->created_at),
+            "last_change" => $this->get_last_change($last_pv_soutenance !== null ? $last_pv_soutenance->created_at : null),
             "recents" => $recent_pvs
         ];
 
@@ -60,8 +59,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    private function get_last_change(DateTime $date){
-        if(!$date){
+    private function get_last_change(DateTime | null $date){
+        if($date == null){
             return "";
         }
         Carbon::setLocale('fr');

@@ -17,7 +17,7 @@ class checkAdmin
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::check()){
-            flash()->error("Vous devez d'abord vous authentifier");
+            flash()->info("Vous devez d'abord vous authentifier");
             return to_route('admin.login');
         }
         return $next($request);
