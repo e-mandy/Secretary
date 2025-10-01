@@ -161,7 +161,7 @@
                                         </svg>
                                     </span>
                                     <div>
-                                        <h4 class="font-medium">Nom du document.extension</h4>
+                                        <h4 class="font-medium">{{ $pv_soutenance->pv_file }}</h4>
                                         <p class="text-sm text-gray-400">Uploadé le 28/09/2024</p>
                                     </div>
                                 </div>

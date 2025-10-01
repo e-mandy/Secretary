@@ -73,7 +73,7 @@ class PVSoutenanceController extends Controller
             $target_filiere = Filiere::select('nom')->where('id', $request->id_filiere)->first();
             $file = $request->file('pv_file');
             $file_ext = $file->extension();
-            $filename = "{$validateFields['nom_etu']}_{$target_filiere->nom}.{$file_ext}";
+            $filename = str_replace(" ", "", "{$validateFields['nom_etu']}_{$target_filiere->nom}.{$file_ext}");
 
             $file->storeAs('pv_soutenances', $filename, 'public');
 
@@ -143,9 +143,15 @@ class PVSoutenanceController extends Controller
 
             $file = $request->file('pv_file');
             $file_ext = $file->extension();
-            $filename = "{$validatedUpdateFields['nom_etu']}_{$target_filiere->nom}.{$file_ext}";
+            $filename = str_replace(" ", "", "{$validatedUpdateFields['nom_etu']}_{$target_filiere->nom}.{$file_ext}");
 
-            Storage::move($last_filename, $filename);
+            // Delete previous file if any
+            if(!empty($last_filename)){
+                Storage::disk('public')->delete("pv_soutenances/{$last_filename}");
+            }
+
+            // Always store the new file on the public disk under pv_soutenances
+            $file->storeAs('pv_soutenances', $filename, 'public');
 
             $pv_soutenance->update([
                 "pv_file" => $filename
@@ -157,7 +163,7 @@ class PVSoutenanceController extends Controller
     }
 
     public function download(PVSoutenance $pv_soutenance){
-        $path = Storage::disk('public')->path("/pv_soutenances/{$pv_soutenance->pv_file}");
+        $path = Storage::disk('public')->path("pv_soutenances/{$pv_soutenance->pv_file}");
 
         return response()->download($path);
     }
@@ -167,7 +173,9 @@ class PVSoutenanceController extends Controller
      */
     public function destroy(ModelsPvSoutenance $pv_soutenance)
     {
-        Storage::disk('public')->delete("pv_soutenances/{$pv_soutenance->nom_etu}");
+        if(!empty($pv_soutenance->pv_file)){
+            Storage::disk('public')->delete("pv_soutenances/{$pv_soutenance->pv_file}");
+        }
         $pv_soutenance->delete();
 
         return redirect()->route('admin.pv_soutenance.index');
