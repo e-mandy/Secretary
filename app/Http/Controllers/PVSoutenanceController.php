@@ -82,6 +82,8 @@ class PVSoutenanceController extends Controller
             ]);
         }
 
+        flash()->success("Ajout du pv de soutenance éffectué avec succès");
+
         return to_route('admin.pv_soutenance.index')->with(['success' => "PV crée avec succès"]);
     }
 
@@ -158,6 +160,8 @@ class PVSoutenanceController extends Controller
             ]);
         }
 
+        flash()->success('Modification du pv de soutenance éffectuée avec succès');
+
         return to_route('admin.pv_soutenance.index');
 
     }
@@ -177,6 +181,8 @@ class PVSoutenanceController extends Controller
             Storage::disk('public')->delete("/pv_soutenances/{$pv_soutenance->pv_file}");
         }
         $pv_soutenance->delete();
+
+        flash()->success('Suppressiond de soutenance effectuée avec succès');
 
         return redirect()->route('admin.pv_soutenance.index');
     }
