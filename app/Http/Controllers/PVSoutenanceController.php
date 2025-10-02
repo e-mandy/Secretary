@@ -174,7 +174,7 @@ class PVSoutenanceController extends Controller
     public function destroy(ModelsPvSoutenance $pv_soutenance)
     {
         if(!empty($pv_soutenance->pv_file)){
-            Storage::disk('public')->delete("pv_soutenances/{$pv_soutenance->pv_file}");
+            Storage::disk('public')->delete("/pv_soutenances/{$pv_soutenance->pv_file}");
         }
         $pv_soutenance->delete();
 
