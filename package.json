@@ -14,7 +14,7 @@
         "daisyui": "^5.1.18",
         "laravel-vite-plugin": "^2.0.0",
         "tailwindcss": "^4.1.11",
-        "vite": "^7.0.4"
+        "vite": "^7.1.11"
     },
     "dependencies": {
         "@tailwindcss/cli": "^4.1.11"
